@@ -6,7 +6,7 @@ import { useServerInsertedHTML } from "next/navigation";
 
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
-export default function ThemeRegistry({
+export default function ThemeRegistryProvider({
   children,
 }: {
   children: React.ReactNode;

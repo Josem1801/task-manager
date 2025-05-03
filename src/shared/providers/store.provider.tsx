@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 
-import { store } from "./app.store";
+import { store } from "@/shared/store/config";
 
 export function ReduxProvider({ children }: { children: React.ReactNode }) {
   return <Provider store={store}>{children}</Provider>;

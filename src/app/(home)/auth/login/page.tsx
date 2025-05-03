@@ -1,11 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-
-import Link from "next/link";
+"use client";
 
 import styled from "styled-components";
 
-import { increment } from "@/lib/store/app.reducer";
-import { RootState } from "@/lib/store/app.store";
+import { LoginForm } from "@/features/auth/components/login-form/login-form.component";
 
 const FlexContainer = styled.div`
   display: flex;
@@ -28,19 +25,11 @@ const Card = styled.div`
     border-color 0.15s ease;
 `;
 
-const StyledLink = styled(Link)`
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-`;
-
 export default function Login() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
   return (
     <FlexContainer>
       <Card>
-        <button onClick={() => dispatch(increment())}>Incremente</button>
-        {count}
+        <LoginForm />
       </Card>
     </FlexContainer>
   );
