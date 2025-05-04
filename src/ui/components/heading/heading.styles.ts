@@ -28,6 +28,11 @@ const variantStyles = {
     font-weight: 500;
     line-height: 1.4;
   `,
+  header: css`
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+  `,
 };
 
 export const Heading = styled.h1<HeadingProps>`

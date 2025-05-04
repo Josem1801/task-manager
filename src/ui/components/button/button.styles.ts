@@ -45,5 +45,19 @@ export const Button = styled.button<ButtonProps>`
 
   ${({ variant }) => variant && variantStyles[variant]}
   ${({ size }) => size && sizeStyles[size]}
-  ${({ color, theme }) => color && `color: ${theme.colors[color]};`}
+  ${({ color, theme }) =>
+    color && `color: ${theme.colors[color as keyof typeof theme.colors]};`}
+
+  svg {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;

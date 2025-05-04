@@ -4,24 +4,32 @@ import { ThemeType } from "@/ui/styled";
 
 import { Typography as STypography } from "./typography.styles";
 
-type Variant = "body1" | "body2" | "caption" | "overline";
+type Variant = "small" | "medium" | "large" | "xlarge" | "xxlarge";
 
 export type TypographyProps = {
   as?: React.ElementType;
-  variant: Variant;
+  variant?: Variant;
   color?: keyof ThemeType["colors"];
+  weight?: "normal" | "semibold" | "bold";
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLElement>;
 
 export const Typography = ({
   as = "span",
-  variant,
+  variant = "medium",
   color = "primary",
+  weight = "normal",
   children,
   ...props
 }: TypographyProps) => {
   return (
-    <STypography as={as} variant={variant} color={color} {...props}>
+    <STypography
+      as={as}
+      variant={variant}
+      color={color}
+      weight={weight}
+      {...props}
+    >
       {children}
     </STypography>
   );

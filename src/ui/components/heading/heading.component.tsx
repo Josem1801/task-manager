@@ -4,7 +4,7 @@ import { ThemeType } from "@/ui/styled";
 
 import { Heading as SHeading } from "./heading.styles";
 
-type Variant = "h1" | "h2" | "h3" | "h4";
+type Variant = "h1" | "h2" | "h3" | "h4" | "header";
 
 export type HeadingProps = {
   variant: Variant;
