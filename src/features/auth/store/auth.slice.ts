@@ -1,5 +1,9 @@
 // auth.slice.ts
-import { decryptToken, encryptToken } from "@/shared/encryption";
+import {
+  decryptToken,
+  EncryptionKeys,
+  encryptToken,
+} from "@/shared/encryption";
 import { StorageKeys } from "@/shared/helpers/local-storage.service";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -17,20 +21,8 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuthCredentials: (state, action: PayloadAction<{ token: string }>) => {
-      const { encryptedToken, key } = encryptToken(action.payload.token);
-
-      state.tokenEncrypted = key;
-      state.isAuthenticated = true;
-
-      sessionStorage.setItem(StorageKeys.token, encryptedToken);
-    },
-
     logout: (state) => {
-      state.isAuthenticated = false;
-      state.tokenEncrypted = null;
-      state.user = null;
-
+      state = initialState;
       sessionStorage.removeItem(StorageKeys.token);
     },
 
@@ -39,7 +31,7 @@ export const authSlice = createSlice({
       const storedToken = sessionStorage.getItem(StorageKeys.token);
       if (storedToken) {
         try {
-          decryptToken(storedToken, storedToken);
+          decryptToken(storedToken, EncryptionKeys.token);
           state.tokenEncrypted = storedToken;
           state.isAuthenticated = true;
         } catch (error) {
@@ -50,5 +42,20 @@ export const authSlice = createSlice({
       }
       state.loading = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      authApi.endpoints.auth.matchFulfilled,
+      (state, action) => {
+        const encryptedToken = encryptToken(
+          action.payload.token,
+          EncryptionKeys.token,
+        );
+        state.tokenEncrypted = encryptedToken;
+        state.isAuthenticated = true;
+
+        sessionStorage.setItem(StorageKeys.token, encryptedToken);
+      },
+    );
   },
 });

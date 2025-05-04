@@ -1,6 +1,5 @@
 import { encryptToken, simulateLatency } from "@/shared/encryption";
 import baseApi from "@/shared/store/api";
-import { register } from "module";
 
 import {
   LoginRequest,
@@ -19,15 +18,9 @@ export const authApi = baseApi
           method: "POST",
           body: credentials,
         }),
-        transformResponse: async (response: { token: string }) => {
+        transformResponse: async (response: LoginResponse) => {
           await simulateLatency(1000, 3000);
-
-          const { encryptedToken, key } = encryptToken(response.token);
-
-          return {
-            token: encryptedToken,
-            key,
-          };
+          return response;
         },
       }),
       validateToken: build.query<void, string>({
