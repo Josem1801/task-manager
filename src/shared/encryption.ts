@@ -1,20 +1,18 @@
 import CryptoJS from "crypto-js";
 
-const generateDynamicKey = () => {
-  const timestamp = Date.now();
-  const randomString = Math.random().toString(36).substring(2, 15);
-  return `${timestamp}-${randomString}`;
+export enum EncryptionKeys {
+  token = "encryption-key-token",
+}
+
+export const encryptToken = (token: string, key: EncryptionKeys) => {
+  const encryptedToken = CryptoJS.AES.encrypt(token, key).toString();
+  return encryptedToken;
 };
 
-export const encryptToken = (
-  token: string,
-): { encryptedToken: string; key: string } => {
-  const dynamicKey = generateDynamicKey();
-  const encryptedToken = CryptoJS.AES.encrypt(token, dynamicKey).toString();
-  return { encryptedToken, key: dynamicKey };
-};
-
-export const decryptToken = (encryptedToken: string, key: string): string => {
+export const decryptToken = (
+  encryptedToken: string,
+  key: EncryptionKeys,
+): string => {
   const bytes = CryptoJS.AES.decrypt(encryptedToken, key);
   return bytes.toString(CryptoJS.enc.Utf8);
 };
