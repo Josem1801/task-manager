@@ -5,12 +5,14 @@ import { ButtonProps } from "./button.component";
 const sizeStyles = {
   small: css`
     padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
   `,
   medium: css`
     padding: 0.5rem 1.25rem;
   `,
   large: css`
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 1.5rem;
   `,
 };
 
@@ -30,6 +32,15 @@ const variantStyles = {
     color: ${({ theme }) => theme.colors.secondary};
     border: 1px solid ${({ theme }) => theme.colors.secondary};
   `,
+  transparent: css`
+    background: transparent;
+    color: ${({ theme }) => theme.colors.secondary};
+    border: none;
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.gray}10;
+    }
+  `,
 };
 
 export const Button = styled.button<ButtonProps>`
@@ -48,16 +59,8 @@ export const Button = styled.button<ButtonProps>`
   ${({ color, theme }) =>
     color && `color: ${theme.colors[color as keyof typeof theme.colors]};`}
 
-  svg {
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 `;

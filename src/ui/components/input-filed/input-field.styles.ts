@@ -1,11 +1,16 @@
+import { ThemeType } from "@/ui/styled";
 import styled, { css } from "styled-components";
 
-import { InputFieldProps } from "./input-field.component";
+export type Props = {
+  variant?: "default";
+  color?: keyof ThemeType["colors"];
+};
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<Props>`
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
 `;
 
 export const Label = styled.label`
@@ -14,27 +19,16 @@ export const Label = styled.label`
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
-const variantStyles = {
-  default: css`
-    border: 1px solid ${({ theme }) => theme.colors.gray};
-    border-radius: 4px;
-    padding: 0.5rem 0.75rem;
-    background: ${({ theme }) => theme.colors.primary};
-  `,
-  underline: css`
-    border: none;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.gray};
-    border-radius: 0;
-    padding: 0.5rem 0;
-    background: transparent;
-  `,
-};
-
-export const Input = styled.input<InputFieldProps>`
+export const Input = styled.input<Props>`
   font-size: 1rem;
+  height: 3.2rem;
+  border-radius: 6px;
   color: ${({ theme, color }) => theme.colors[color || "secondary"]};
   outline: none;
-  ${({ variant }) => variant && variantStyles[variant]}
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.gray};
+  padding: 0.5rem 0.75rem;
+  background: transparent;
   transition: border 0.2s;
 
   &:focus {

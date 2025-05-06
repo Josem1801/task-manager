@@ -1,15 +1,14 @@
 import React, { forwardRef, useState } from "react";
 
+import * as SInput from "@/ui/components/input-filed/input-field.styles";
+import { Eye } from "@/ui/icons/eye";
+import { EyeOff } from "@/ui/icons/eye-off";
 import { ThemeType } from "@/ui/styled";
+import { Variant } from "@testing-library/react";
 
-import {
-  InputWrapper,
-  Label,
-  Input as SInput,
-  ToggleButton,
-} from "./input-password.styles";
-
-type Variant = "default" | "underline";
+import { InputField } from "../input-filed";
+import { Input, InputWrapper, Label } from "../input-filed/input-field.styles";
+import { ToggleButton } from "./input-password.styles";
 
 export type InputPasswordProps = {
   label?: string;
@@ -20,17 +19,14 @@ export type InputPasswordProps = {
 export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
   ({ label, variant = "default", color = "secondary", ...props }, ref) => {
     const [show, setShow] = useState(false);
-
     return (
-      <InputWrapper>
-        {label && <Label>{label}</Label>}
+      <SInput.InputWrapper>
+        {label && <SInput.Label>{label}</SInput.Label>}
         <div style={{ position: "relative", width: "100%" }}>
-          <SInput
-            {...props}
+          <SInput.Input
             ref={ref}
-            variant={variant}
             color={color}
-            style={{ paddingRight: "2.5rem" }}
+            {...props}
             type={show ? "text" : "password"}
           />
           <ToggleButton
@@ -39,12 +35,12 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
             onClick={() => setShow((v) => !v)}
             aria-label={show ? "Ocultar contraseña" : "Mostrar contraseña"}
           >
-            {show ? "🙈" : "👁️"}
+            {show ? <Eye /> : <EyeOff />}
           </ToggleButton>
         </div>
-      </InputWrapper>
+      </SInput.InputWrapper>
     );
   },
 );
 
-InputPassword.displayName = "InputPassword";
+InputField.displayName = "InputPassword";

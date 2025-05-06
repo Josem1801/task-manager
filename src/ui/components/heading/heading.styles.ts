@@ -39,4 +39,6 @@ export const Heading = styled.h1<HeadingProps>`
   margin: 0;
   ${({ variant }) => variantStyles[variant]}
   ${({ color, theme }) => `color: ${color || theme.colors.secondary}`}
+  ${({ weight }) => weight && `font-weight: ${weight}`}
+  ${({ underline }) => underline && `text-decoration: underline`}
 `;

@@ -2,6 +2,12 @@ import styled, { css } from "styled-components";
 
 import { TypographyProps } from "./typography.component";
 
+const weights = {
+  normal: 400,
+  semibold: 600,
+  bold: 700,
+};
+
 const variantStyles = {
   small: css`
     font-size: 12px;
@@ -11,7 +17,7 @@ const variantStyles = {
   medium: css`
     font-size: 14px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.3;
   `,
   large: css`
     font-size: 16px;
@@ -33,5 +39,5 @@ const variantStyles = {
 export const Typography = styled.span<TypographyProps>`
   ${({ color, theme }) => `color: ${color || theme.colors.secondary}`}
   ${({ variant }) => variant && variantStyles[variant]}
-  font-weight: ${({ weight }) => weight};
+  font-weight: ${({ weight }) => weights[weight || "normal"]};
 `;

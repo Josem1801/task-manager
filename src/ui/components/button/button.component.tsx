@@ -5,7 +5,7 @@ import { ThemeType } from "@/ui/styled";
 
 import { Button as SButton } from "./button.styles";
 
-type Variant = "primary" | "secondary" | "outline";
+type Variant = "primary" | "secondary" | "outline" | "transparent";
 
 export type ButtonProps = {
   variant?: Variant;

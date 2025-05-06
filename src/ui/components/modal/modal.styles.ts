@@ -10,18 +10,12 @@ type Props = {
 export const ModalContent = styled.div<Pick<Props, "size">>`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   background-color: ${({ theme }) => theme.colors.light};
   border-radius: 10px;
   padding: 3%;
   height: auto;
   aspect-ratio: inherit;
-
-  button:first-child {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
 `;
 
 export const ModalContainer = styled.div<Props>`

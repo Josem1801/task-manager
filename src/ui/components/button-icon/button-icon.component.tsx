@@ -1,12 +1,6 @@
 import React, { HTMLAttributes, PropsWithChildren } from "react";
 
-import { ButtonIconContainer as SButtonIconContainer } from "./button-icon.styles";
-
-type Props = {
-  isActive?: boolean;
-  variant?: "primary" | "secondary";
-  size?: "small" | "medium";
-};
+import * as S from "./button-icon.styles";
 
 export const ButtonIcon = ({
   children,
@@ -14,15 +8,17 @@ export const ButtonIcon = ({
   isActive,
   variant,
   size,
-}: PropsWithChildren<HTMLAttributes<HTMLButtonElement> & Props>) => {
+  ...props
+}: PropsWithChildren<HTMLAttributes<HTMLButtonElement> & Partial<S.Props>>) => {
   return (
-    <SButtonIconContainer
+    <S.ButtonIconContainer
+      {...props}
       onClick={onClick}
       isActive={isActive}
       variant={variant}
-      size={size}
+      size={size || "medium"}
     >
       {children}
-    </SButtonIconContainer>
+    </S.ButtonIconContainer>
   );
 };
