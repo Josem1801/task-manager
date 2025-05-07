@@ -1,36 +1,34 @@
 "use client";
 
-import styled from "styled-components";
+import Image from "next/image";
+
+import { Box } from "@/ui/components/box";
 
 import { LoginForm } from "@/features/auth/components/login-form/login-form.component";
 
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 3rem;
-`;
-
-const Card = styled.div`
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: black;
-  text-decoration: none;
-  border: 1px solid black;
-  border-radius: 10px;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
-`;
-
 export default function Login() {
   return (
-    <FlexContainer>
-      <Card>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      gap={40}
+      maxWidth="desktop"
+      width="100%"
+      margin="auto"
+    >
+      <Box width="100%" display="flex" justifyContent="center">
         <LoginForm />
-      </Card>
-    </FlexContainer>
+      </Box>
+      <Box
+        hiddenAt="tablet"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        position="relative"
+      >
+        <Image src="/images/login.svg" alt="login" fill />
+      </Box>
+    </Box>
   );
 }

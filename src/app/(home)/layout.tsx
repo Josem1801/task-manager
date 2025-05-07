@@ -1,9 +1,9 @@
 import React, { PropsWithChildren } from "react";
 
-import { AuthProvider } from "@/features/auth/components/auth-provider";
+import { AuthLayout } from "@/features/auth/components/auth-layout";
 
 const HomeLayout = ({ children }: PropsWithChildren) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <AuthLayout>{children}</AuthLayout>;
 };
 
 export default HomeLayout;

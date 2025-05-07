@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aplicación de Gestión de Tareas
 
-## Getting Started
+Este proyecto es una aplicación web desarrollada como parte de una prueba técnica frontend.
 
-First, run the development server:
+Su objetivo es permitir la autenticación de usuarios y la gestión de tareas mediante un sistema de tablero estilo Trello, con funcionalidad de arrastrar y soltar, persistencia de datos y actualizaciones en tiempo real.
+
+## 🚀 Características
+
+- **Autenticación Segura**
+
+  - Integración con API de ReqRes (https://reqres.in/)
+  - Almacenamiento encriptado de tokens
+  - Persistencia de sesión
+  - Verificación de clave dinámica
+  - Manejo de latencia simulada
+
+- **Gestión Avanzada de Tareas**
+
+  - Interfaz de arrastrar y soltar
+  - Múltiples columnas personalizables
+  - Operaciones CRUD de tareas
+  - Prevención de duplicados
+  - Diálogos de confirmación
+  - Identificadores únicos de tareas
+  - Validación de caracteres especiales
+
+- **Gestión de Datos**
+
+  - Estructura de datos basada en árbol
+  - Sistema de favoritos
+  - Filtrado y búsqueda avanzada
+  - Caché en memoria
+  - Bloqueo optimista
+  - Compresión y serialización de datos
+
+- **Actualizaciones en Tiempo Real**
+  - Integración con WebSocket/SSE
+  - Soporte para edición concurrente
+  - Sincronización de tareas en tiempo real
+
+## 🛠️ Tecnologías
+
+- **Framework Frontend**: Next.js
+- **Lenguaje**: TypeScript
+- **Gestión de Estado**: Redux Toolkit
+- **Estilos**: Styled Components
+- **Testing**: Jest + React Testing Library
+- **Manejo de Formularios**: React Hook Form + Yup
+- **Arrastrar y Soltar**: DnD Kit
+- **Encriptación**: CryptoJS
+- **Compresión**: LZ-String
+
+## 📋 Prerrequisitos
+
+- Node.js (v18 o superior)
+- npm o yarn
+- Git
+
+## 🚀 Comenzando
+
+1. **Clonar el repositorio**
+
+   ```bash
+   git clone https://github.com/yourusername/.git
+   cd task-manager
+   ```
+
+2. **Instalar dependencias**
+
+   ```bash
+   npm install
+   # o
+   yarn install
+   ```
+
+3. **Ejecutar el servidor de desarrollo**
+
+   ```bash
+   npm run dev
+   # o
+   yarn dev
+   ```
+
+4. **Abrir el navegador**
+   Visitar [http://localhost:3000](http://localhost:3000)
+
+## 🧪 Pruebas
+
+Ejecutar el conjunto de pruebas con:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm test
+# o
+yarn test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El proyecto mantiene un mínimo de 50% de cobertura de código.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Construir para Producción
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+# o
+yarn build
+```
 
-## Learn More
+## 🏗️ Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/              # Router de Next.js
+├── components/       # Componentes UI reutilizables
+├── features/         # Slices y características de Redux
+├── hooks/            # Hooks personalizados de React
+├── services/         # Integraciones de API y servicios
+├── styles/           # Estilos globales y temas
+└── utils/            # Funciones y utilidades
+public/               # Recursos estáticos
+tests/                # Archivos de prueba
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔒 Características de Seguridad
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Almacenamiento local encriptado
+- Gestión segura de sesiones
+- Validación y sanitización de entradas
+- Rutas API protegidas
+- Protección contra CSRF
 
-## Deploy on Vercel
+## 📊 Estructura de Datos
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+La aplicación utiliza una estructura de datos basada en árbol para la gestión de tareas, proporcionando:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Organización eficiente de tareas
+- Acceso rápido a tareas anidadas
+- Actualizaciones de estado optimizadas
+- Mejor rendimiento para grandes conjuntos de datos
+
+## 📝 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 🔗 Recursos
+
+- [Next.js](https://nextjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Styled Components](https://styled-components.com/)
+- [ReqRes API](https://reqres.in/)

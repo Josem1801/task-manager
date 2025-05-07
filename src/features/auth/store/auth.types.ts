@@ -1,33 +1,37 @@
-export interface AuthState {
+export type TAuthState = {
   isAuthenticated: boolean;
-  tokenEncrypted: string | null;
-  user: { email: string } | null;
+  token: string | null;
+  profile: TProfile | null;
   loading: boolean;
-}
+};
 
-export interface LoginRequest {
+export type TProfile = {
+  id: number;
+  name: string;
+  year: number;
+  color: string;
+  pantone_value: string;
+};
+
+export type TLoginRequest = {
   email: string;
   password: string;
-}
+};
 
-export interface LoginResponse {
+export type TLoginResponse = {
   token: string;
-}
+};
 
-export interface LoginError {
+export type TLoginError = {
   error: string;
-}
+};
 
-export interface User {
-  email: string;
-}
-
-export interface RegisterRequest {
+export type TRegisterRequest = {
   email: string;
   password: string;
-}
+};
 
-export interface RegisterResponse {
+export type TRegisterResponse = {
   id: string;
   token: string;
-}
+};

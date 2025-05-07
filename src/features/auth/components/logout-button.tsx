@@ -1,9 +1,14 @@
 import { useAppDispatch } from "@/shared/store/types";
+import { Button } from "@/ui/components/button";
 
 import { AuthActions } from "../store";
 
 export const LogoutButton = () => {
   const dispatch = useAppDispatch();
 
-  return <button onClick={() => dispatch(AuthActions.logout())}>Logout</button>;
+  const handleLogout = async () => {
+    dispatch(AuthActions.logoutUser());
+  };
+
+  return <Button onClick={handleLogout}>Logout</Button>;
 };
