@@ -12,6 +12,7 @@ export const DraggableContainer = styled.div<{
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
   transform: translate3d(
     ${({ transform }) => transform?.x ?? 0}px,
     ${({ transform }) => transform?.y ?? 0}px,
@@ -28,7 +29,7 @@ export const DraggableContainer = styled.div<{
     css`
       z-index: 1;
       transition: none;
-
+      opacity: 0.5;
       * {
         cursor: grabbing;
       }

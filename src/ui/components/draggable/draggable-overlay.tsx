@@ -7,19 +7,15 @@ import { dropAnimationConfig } from "./draggable.config";
 
 interface Props {
   dropAnimation?: DropAnimation | null;
-  component: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export function DraggableOverlay({
   dropAnimation = dropAnimationConfig,
-  component,
+  children,
 }: Props) {
-  const { active } = useDndContext();
-
   return createPortal(
-    <DragOverlay dropAnimation={dropAnimation}>
-      {active ? component : null}
-    </DragOverlay>,
+    <DragOverlay dropAnimation={dropAnimation}>{children}</DragOverlay>,
     document.body,
   );
 }

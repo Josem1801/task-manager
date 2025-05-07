@@ -1,28 +1,33 @@
 import React from "react";
 
-import { UniqueIdentifier, useDroppable } from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
-import { DroppableContainer } from "./droppable.styles";
-
-interface Props {
+type DroppableProps = {
+  id: string;
+  items: string[];
   children: React.ReactNode;
-  dragging: boolean;
-  id: UniqueIdentifier;
-}
+};
 
-export function Droppable({ children, id, dragging }: Props) {
-  const { setNodeRef, isOver } = useDroppable({
+export const Droppable = (props: DroppableProps) => {
+  const { id, items, children } = props;
+  const { setNodeRef } = useDroppable({
     id,
+    data: {
+      id,
+    },
   });
 
   return (
-    <DroppableContainer
-      ref={setNodeRef}
-      style={{
-        opacity: isOver ? 0.5 : 1,
-      }}
+    <SortableContext
+      id={id}
+      items={items}
+      strategy={verticalListSortingStrategy}
     >
-      {children}
-    </DroppableContainer>
+      <div ref={setNodeRef}>{children}</div>
+    </SortableContext>
   );
-}
+};

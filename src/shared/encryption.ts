@@ -2,6 +2,7 @@ import CryptoJS from "crypto-js";
 
 export enum EncryptionKeys {
   token = "encryption-key-token",
+  taskId = "encryption-key-task-id",
 }
 
 export const encryptToken = (token: string, key: EncryptionKeys) => {

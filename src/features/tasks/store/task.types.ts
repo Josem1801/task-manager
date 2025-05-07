@@ -1,6 +1,7 @@
 export type TBoardTask = {
   id: string;
   name: string;
+  createdBy: string;
   description?: string;
   isFavorite: boolean;
   createdAt: string;
@@ -23,5 +24,23 @@ export type TBoardState = {
   error: string | null;
   editingTaskId: {
     [taskId: string]: boolean;
+  };
+};
+
+export type TCreateTask = Omit<TBoardTask, "id" | "createdAt"> & {
+  columnId: string;
+};
+
+// Payload types
+export type MoveTaskProps = {
+  over: {
+    id: string;
+    containerId: string;
+    index: number;
+  };
+  active: {
+    id: string;
+    containerId: string;
+    index: number;
   };
 };

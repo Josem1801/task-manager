@@ -1,7 +1,7 @@
 import React, { JSX, PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 
-import { storeConfig } from "@/shared/store/config";
+import { storeConfig } from "@/shared/store/store.config";
 import { RootState } from "@/shared/store/types";
 import { configureStore } from "@reduxjs/toolkit";
 import { render } from "@testing-library/react";

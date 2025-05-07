@@ -8,8 +8,8 @@ export const dropAnimationConfig: DropAnimation = {
       {
         transform: CSS.Transform.toString({
           ...transform.final,
-          scaleX: 0.95,
-          scaleY: 0.95,
+          scaleX: 0.98,
+          scaleY: 0.98,
         }),
       },
     ];

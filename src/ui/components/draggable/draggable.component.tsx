@@ -34,6 +34,9 @@ export const Draggable = forwardRef<HTMLDivElement, Props>(function Draggable(
       dragging={dragging}
       dragOverlay={dragOverlay}
       transform={transform}
+      style={{
+        opacity: dragging ? 0.5 : 1,
+      }}
       {...props}
     >
       {props.children}

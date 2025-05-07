@@ -1,61 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { taskApi } from "./task.api";
-import { BoardState, Task } from "./task.types";
+import { MoveTaskProps, TBoardState, TBoardTask } from "./task.types";
 
-const initialState: BoardState = {
-  tasks: {
-    "1": {
-      id: "1",
-      name: "Task 1",
-      description: "Description 1",
-      isFavorite: false,
-      createdAt: "2021-01-01",
-    },
-    "2": {
-      id: "2",
-      name: "Task 2",
-      description: "Description 2",
-      isFavorite: false,
-      createdAt: "2021-01-01",
-    },
-    "3": {
-      id: "3",
-      name: "Task 3",
-      description: "Description 3",
-      isFavorite: false,
-      createdAt: "2021-01-01",
-    },
-    "4": {
-      id: "4",
-      name: "Task 4",
-      description: "Description 4",
-      isFavorite: false,
-      createdAt: "2021-01-01",
-    },
-    "5": {
-      id: "5",
-      name: "Task 5",
-      description: "Description 5",
-      isFavorite: false,
-      createdAt: "2021-01-01",
-    },
-  },
+const initialState: TBoardState = {
+  tasks: {},
   columns: {
     "col-pending": {
       id: "col-pending",
       title: "Pending",
-      tasks: ["1"],
+      tasks: [],
     },
     "col-in-progress": {
       id: "col-in-progress",
       title: "In Progress",
-      tasks: ["2"],
+      tasks: [],
     },
     "col-done": {
       id: "col-done",
       title: "Done",
-      tasks: ["3", "4", "5"],
+      tasks: [],
     },
   },
   isLoading: false,
@@ -67,19 +31,34 @@ export const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    moveTask: (state, action) => {
-      const { columnId, taskId, newColumnId } = action.payload;
+    moveTask: (state, action: PayloadAction<MoveTaskProps>) => {
+      const { over, active } = action.payload;
+      // remove the task from the active column
+      const column = state.columns[active.containerId];
+      const taskIndex = column.tasks.indexOf(active.id);
+      column.tasks.splice(taskIndex, 1);
 
-      state.columns[columnId].tasks = state.columns[columnId].tasks.filter(
-        (id) => id !== taskId,
-      );
-      state.columns[newColumnId].tasks.push(taskId);
+      // add the task to the over column
+      const overColumn = state.columns[over.containerId];
+      overColumn.tasks.splice(over.index, 0, active.id);
+
+      state.columns = {
+        ...state.columns,
+        [active.containerId]: column,
+        [over.containerId]: overColumn,
+      };
     },
     sortTask: (state, action) => {
       const { tasks, columnId } = action.payload;
       if (!state.columns[columnId]) return;
       state.columns[columnId].tasks = tasks;
     },
+    updateTask: (state, action: PayloadAction<TBoardTask>) => {
+      const task = action.payload;
+      if (!state.tasks[task.id]) return;
+      state.tasks[task.id] = task;
+    },
+    reset: () => initialState,
   },
   extraReducers: (builder) => {
     // update the tasks and columns
@@ -92,7 +71,7 @@ export const taskSlice = createSlice({
               acc[task.id] = task;
               return acc;
             },
-            {} as BoardState["tasks"],
+            {} as TBoardState["tasks"],
           );
         },
       )
@@ -105,13 +84,16 @@ export const taskSlice = createSlice({
       .addMatcher(
         taskApi.endpoints.deleteTask.matchFulfilled,
         (state, action) => {
-          delete state.tasks[action.payload.id];
+          console.log(action.payload);
+          delete state.tasks[action.payload];
         },
       )
       .addMatcher(
         taskApi.endpoints.createTask.matchFulfilled,
         (state, action) => {
+          console.log(action.payload);
           state.tasks[action.payload.id] = action.payload;
+          state.columns[action.payload.columnId].tasks.push(action.payload.id);
         },
       );
   },
