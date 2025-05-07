@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 
 import { useDisclosure } from "@/shared/hooks/use-disclosure";
 import { useAppDispatch, useAppSelector } from "@/shared/store/types";
@@ -21,7 +21,7 @@ import {
 } from "@/features/tasks/store/task.api";
 import { TBoardTask } from "@/features/tasks/store/task.types";
 
-import { BoardDnD } from "./board.dnd";
+import { BoardDnD } from "./task-board.dnd";
 
 export const TaskBoard = () => {
   const [selectedTask, setSelectedTask] = useState<TBoardTask | null>(null);
@@ -33,8 +33,6 @@ export const TaskBoard = () => {
 
   const dispatch = useAppDispatch();
   const profile = useAppSelector(AuthSelector.getProfile);
-  const columns = useAppSelector(TaskSelector.getColumns);
-  const tasks = useAppSelector(TaskSelector.getTasks);
 
   const [createTask, createTaskResult] = useCreateTaskMutation();
   const [updateTask, updateTaskResult] = useUpdateTaskMutation();
@@ -98,7 +96,7 @@ export const TaskBoard = () => {
   return (
     <Fragment>
       <BoardDnD
-        renderColumn={({ columnId }) => (
+        renderColumn={({ columnId, columns, tasks }) => (
           <Droppable
             id={columnId}
             key={columnId}

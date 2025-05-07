@@ -9,7 +9,7 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 
-import { SortTaskProps } from "../components/task-board/board.dnd";
+import { SortTaskProps } from "../components/task-board/task-board.dnd";
 import { MoveTaskProps, TBoardState } from "../store/task.types";
 
 type Props = {

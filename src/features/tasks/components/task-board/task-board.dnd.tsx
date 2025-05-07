@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/shared/store/types";
 import { DraggableOverlay } from "@/ui/components/draggable";
@@ -13,7 +13,7 @@ import {
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 
 import { Task } from "@/features/tasks/components/task/task.component";
-import { MoveTaskProps } from "@/features/tasks/store/task.types";
+import { MoveTaskProps, TBoardState } from "@/features/tasks/store/task.types";
 
 import { useDndDragTaskEvents } from "../../hooks/use-dnd-drag-task-events";
 import { TaskActions, TaskSelector } from "../../store";
@@ -24,8 +24,14 @@ export type SortTaskProps = {
   tasks: string[];
 };
 
+type RenderColumnProps = {
+  columnId: string;
+  columns: TBoardState["columns"];
+  tasks: TBoardState["tasks"];
+};
+
 interface Props {
-  renderColumn?: (props: { columnId: string }) => React.ReactNode;
+  renderColumn?: (props: RenderColumnProps) => React.ReactNode;
 }
 
 export function BoardDnD({ renderColumn }: Props) {
@@ -33,6 +39,9 @@ export function BoardDnD({ renderColumn }: Props) {
 
   const columns = useAppSelector(TaskSelector.getColumns);
   const tasks = useAppSelector(TaskSelector.getTasks);
+
+  const columnsCache = useMemo(() => columns, [columns]);
+  const tasksCache = useMemo(() => tasks, [tasks]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -46,7 +55,7 @@ export function BoardDnD({ renderColumn }: Props) {
   );
 
   const drag = useDndDragTaskEvents({
-    columns,
+    columns: columnsCache,
     onMoveTask: (data: MoveTaskProps) => {
       dispatch(TaskActions.moveTask(data));
     },
@@ -65,9 +74,15 @@ export function BoardDnD({ renderColumn }: Props) {
         onDragCancel={drag.handleDragCancel}
         onDragOver={drag.handleDragOver}
       >
-        {Object.keys(columns).map((columnId) => (
+        {Object.keys(columnsCache).map((columnId) => (
           <Fragment key={columnId}>
-            {renderColumn ? renderColumn({ columnId }) : null}
+            {renderColumn
+              ? renderColumn({
+                  columnId,
+                  columns: columnsCache,
+                  tasks: tasksCache,
+                })
+              : null}
           </Fragment>
         ))}
         <DraggableOverlay>
