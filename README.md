@@ -108,15 +108,19 @@ yarn build
 
 ```
 src/
-├── app/              # Router de Next.js
-├── components/       # Componentes UI reutilizables
-├── features/         # Slices y características de Redux
-├── hooks/            # Hooks personalizados de React
-├── services/         # Integraciones de API y servicios
-├── styles/           # Estilos globales y temas
-└── utils/            # Funciones y utilidades
-public/               # Recursos estáticos
-tests/                # Archivos de prueba
+├── app/                  # Router de Next.js
+├── features/             # Caracteristicas especificas de la app
+│   └── .../              # Nombre de la caracteristica
+│       └── components/   # Componentes de la caracteristica
+│       └── store/        # Redux store
+├── shared/               # Código reutilizable y compartido
+├── services/             # Integraciones de API y servicios
+├── ui/                   # Estilos globales y temas
+│   └── components/       # Componentes reutilizables
+│   └── icons/            # Iconos pasados a componentes
+└── utils/                # Funciones y utilidades
+public/                   # Recursos estáticos
+tests/                    # Archivos de prueba
 ```
 
 ## 🔒 Características de Seguridad
