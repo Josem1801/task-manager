@@ -14,6 +14,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       variant = "default",
       color = "secondary",
       size = "medium",
+      error,
       style,
       ...props
     },
@@ -23,11 +24,13 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       {label && <S.Label>{label}</S.Label>}
       <S.Input
         color={color}
+        error={error}
         ref={ref}
         size={size}
         variant={variant}
         {...props}
       />
+      <S.Error error={error}>{error}</S.Error>
     </S.InputWrapper>
   ),
 );

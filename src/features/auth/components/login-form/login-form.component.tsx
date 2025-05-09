@@ -58,26 +58,31 @@ export const LoginForm = () => {
         <Box
           display="flex"
           flexDirection="column"
-          gap={20}
+          gap={24}
           margin="20px 0 40px 0"
         >
           <InputField
-            label="Email"
             {...methods.register("email")}
+            error={methods.formState.errors.email?.message}
             id="email"
+            label="Email"
             name="email"
             required
             type="email"
           />
           <InputPassword
-            label="Password"
             {...methods.register("password")}
+            error={methods.formState.errors.password?.message}
             id="password"
+            label="Password"
             name="password"
             required
             type="password"
           />
         </Box>
+        {login.isError && (
+          <Typography color="error">{JSON.stringify(login.error)}</Typography>
+        )}
         <Button loading={login.isLoading} size="large" type="submit">
           Login
         </Button>

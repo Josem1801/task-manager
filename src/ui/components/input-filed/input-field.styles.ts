@@ -6,6 +6,7 @@ export type Props = {
   variant?: "default";
   color?: keyof ThemeType["colors"];
   size?: keyof typeof sizeStyles;
+  error?: string;
 };
 
 const sizeStyles = {
@@ -26,7 +27,7 @@ const sizeStyles = {
   `,
 };
 
-export const InputWrapper = styled.div<Props>`
+export const InputWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -53,4 +54,21 @@ export const Input = styled.input<Props>`
   &:focus {
     border-color: ${({ theme }) => theme.colors.secondary};
   }
+
+  ${({ error }) =>
+    error &&
+    css`
+      border-color: ${({ theme }) => theme.colors.error};
+      &:focus {
+        border-color: ${({ theme }) => theme.colors.error};
+      }
+    `}
+`;
+
+export const Error = styled.span<Pick<Props, "error">>`
+  position: absolute;
+  bottom: -1.1rem;
+  font-size: 0.8rem;
+  left: 0;
+  color: ${({ theme }) => theme.colors.error};
 `;

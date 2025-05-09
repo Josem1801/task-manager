@@ -12,7 +12,7 @@ export type InputPasswordProps = {
   Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">;
 
 export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
-  ({ label, size = "medium", color = "secondary", ...props }, ref) => {
+  ({ label, size = "medium", error, color = "secondary", ...props }, ref) => {
     const [show, setShow] = useState(false);
 
     return (
@@ -21,6 +21,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
         <div style={{ position: "relative", width: "100%" }}>
           <S.Input
             color={color}
+            error={error}
             ref={ref}
             size={size}
             {...props}
@@ -35,6 +36,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
             {show ? <Eye /> : <EyeOff />}
           </ToggleButton>
         </div>
+        <S.Error error={error}>{error}</S.Error>
       </S.InputWrapper>
     );
   },

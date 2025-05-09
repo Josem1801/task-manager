@@ -26,8 +26,9 @@ export const authApi = baseApi
         },
       }),
       validateToken: build.query<TProfile, string>({
-        query: (token) => ({
-          url: `/unknown/${token}`,
+        query: () => ({
+          // TODO: pass the dynamic token
+          url: `/unknown/2`,
           method: "GET",
         }),
         transformResponse: (response: { data: TProfile }) => response?.data,
