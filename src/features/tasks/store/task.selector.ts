@@ -10,3 +10,13 @@ export const getTasks = createSelector(
   (state: RootState) => state.task.tasks,
   (tasks) => tasks,
 );
+
+export const getTaskNames = createSelector(
+  (state: RootState) => state.task.tasks,
+  (tasks) => Object.values(tasks).map((task) => task.name),
+);
+
+export const isTaskNameExists = createSelector(
+  [getTaskNames],
+  (taskNames) => (name: string) => taskNames.includes(name),
+);

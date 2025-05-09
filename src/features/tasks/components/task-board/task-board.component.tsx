@@ -1,26 +1,18 @@
 import React, { Fragment, useState } from "react";
 
 import { useDisclosure } from "@/shared/hooks/use-disclosure";
-import { useAppDispatch, useAppSelector } from "@/shared/store/types";
+import { useAppDispatch } from "@/shared/store/types";
 import { Droppable } from "@/ui/components/droppable";
-import { ModalConfirmation } from "@/ui/components/modal";
 import { Sortable } from "@/ui/components/sortable";
 
-import { AuthSelector } from "@/features/auth/store";
 import { BoardColumn } from "@/features/tasks/components/column";
-import {
-  CreateTaskModal,
-  CreateTaskSchema,
-} from "@/features/tasks/components/create-task-modal";
+import { CreateTaskModal } from "@/features/tasks/components/create-task-modal";
 import { Task } from "@/features/tasks/components/task";
 import { TaskActions } from "@/features/tasks/store";
-import {
-  useCreateTaskMutation,
-  useDeleteTaskMutation,
-  useUpdateTaskMutation,
-} from "@/features/tasks/store/task.api";
 import { TBoardTask } from "@/features/tasks/store/task.types";
 
+import { DeleteTaskModal } from "../delete-task-modal";
+import { UpdateTaskModal } from "../update-task-modal";
 import { BoardDnD } from "./task-board.dnd";
 
 export const TaskBoard = () => {
@@ -32,50 +24,6 @@ export const TaskBoard = () => {
   const deleteTaskModal = useDisclosure();
 
   const dispatch = useAppDispatch();
-  const profile = useAppSelector(AuthSelector.getProfile);
-
-  const [createTask, createTaskResult] = useCreateTaskMutation();
-  const [updateTask, updateTaskResult] = useUpdateTaskMutation();
-  const [deleteTask, deleteTaskResult] = useDeleteTaskMutation();
-
-  const handleAddTask = async (data: CreateTaskSchema) => {
-    try {
-      await createTask({
-        createdBy: String(profile?.id),
-        isFavorite: false,
-        columnId,
-        ...data,
-      });
-      createTaskModal.close();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleEditTask = async (data: CreateTaskSchema) => {
-    if (!selectedTask) return;
-
-    try {
-      await updateTask({
-        ...selectedTask,
-        ...data,
-      });
-      updateTaskModal.close();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDeleteTask = async () => {
-    if (!selectedTask) return;
-
-    try {
-      await deleteTask(selectedTask.id).unwrap();
-      deleteTaskModal.close();
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleFavoriteTask = (task: TBoardTask) => {
     dispatch(TaskActions.updateTask(task));
@@ -140,25 +88,11 @@ export const TaskBoard = () => {
         )}
       />
       {/* Modals */}
-      <CreateTaskModal
-        loading={createTaskResult.isLoading}
-        modal={createTaskModal}
-        onSubmit={handleAddTask}
-      />
-      <CreateTaskModal
-        defaultValues={selectedTask}
-        loading={updateTaskResult.isLoading}
-        modal={updateTaskModal}
-        onSubmit={handleEditTask}
-      />
-      <ModalConfirmation
-        description="Are you sure you want to delete this task?"
-        loading={deleteTaskResult.isLoading}
-        modal={deleteTaskModal}
-        onCancel={deleteTaskModal.close}
-        onConfirm={handleDeleteTask}
-        title="Delete Task"
-      />
+      <CreateTaskModal columnId={columnId} modal={createTaskModal} />
+      <UpdateTaskModal defaultValues={selectedTask} modal={updateTaskModal} />
+      {selectedTask ? (
+        <DeleteTaskModal id={selectedTask.id} modal={deleteTaskModal} />
+      ) : null}
     </Fragment>
   );
 };

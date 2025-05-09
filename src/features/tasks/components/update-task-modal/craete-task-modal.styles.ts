@@ -3,5 +3,5 @@ import styled from "styled-components";
 export const SForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1rem;
 `;
