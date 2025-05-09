@@ -23,10 +23,10 @@ latencia y detectar código que dependa de tiempos fijos.
 
 [x] Implementar un tablero de tareas con drag and drop (arrastrar y soltar) para
 gestionar tareas.
-[] Múltiples columnas con estados configurables (Ejemplo: "Pendiente", "En
+[x] Múltiples columnas con estados configurables (Ejemplo: "Pendiente", "En
 progreso", "Completado").
 [x] Agregar, editar y eliminar tareas.
-[] Evitar la duplicación de nombres de tareas.
+[x] Evitar la duplicación de nombres de tareas.
 [x] Confirmación de eliminación antes de borrar una tarea.
 [x] Persistencia de tareas por usuario, incluso después de cerrar sesión.
 [x] Cada tarea debe contar con un identificador único generado manualmente en
