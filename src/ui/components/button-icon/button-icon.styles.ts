@@ -10,7 +10,7 @@ const sizes = {
 export type Props = {
   isActive?: boolean;
   variant?: "primary" | "secondary";
-  size: keyof typeof sizes;
+  size?: keyof typeof sizes;
 };
 
 export const ButtonIconContainer = styled.button<Props>`
@@ -25,8 +25,8 @@ export const ButtonIconContainer = styled.button<Props>`
   padding: 0.35rem;
   border-radius: 50%;
   aspect-ratio: 1 / 1;
-  width: ${({ size }) => sizes[size]};
-  height: ${({ size }) => sizes[size]};
+  width: ${({ size }) => sizes[size as keyof typeof sizes]};
+  height: ${({ size }) => sizes[size as keyof typeof sizes]};
   background-color: ${({ theme }) => theme.colors.light};
 
   color: ${({ theme }) => theme.colors.secondary};
@@ -36,6 +36,11 @@ export const ButtonIconContainer = styled.button<Props>`
     background-color: ${({ theme, variant }) =>
       variant === "primary" ? theme.colors.primary : theme.colors.light};
     opacity: 0.6;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   svg {

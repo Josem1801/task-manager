@@ -96,6 +96,21 @@ export const TaskBoard = () => {
     deleteTaskModal.open();
   };
 
+  const handleEditColumnName = ({
+    id,
+    title,
+  }: {
+    id: string;
+    title: string;
+  }) => {
+    dispatch(
+      TaskActions.updateColumnName({
+        id,
+        title,
+      }),
+    );
+  };
+
   return (
     <Fragment>
       <BoardDnD
@@ -108,6 +123,7 @@ export const TaskBoard = () => {
             <BoardColumn
               column={columns[columnId]}
               onAddTask={() => handleAddTaskModal(columnId)}
+              onUpdateColumnName={handleEditColumnName}
             >
               {columns[columnId].tasks.map((taskId: string) => (
                 <Sortable id={taskId} key={taskId}>

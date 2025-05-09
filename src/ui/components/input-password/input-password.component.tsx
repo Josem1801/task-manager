@@ -1,28 +1,28 @@
 import React, { forwardRef, useState } from "react";
 
-import * as SInput from "@/ui/components/input-filed/input-field.styles";
+import * as S from "@/ui/components/input-filed/input-field.styles";
 import { Eye } from "@/ui/icons/eye";
 import { EyeOff } from "@/ui/icons/eye-off";
-import { ThemeType } from "@/ui/styled";
 
 import { ToggleButton } from "./input-password.styles";
 
 export type InputPasswordProps = {
   label?: string;
-  color?: keyof ThemeType["colors"];
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & S.Props &
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">;
 
 export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
-  ({ label, color = "secondary", ...props }, ref) => {
+  ({ label, size = "medium", color = "secondary", ...props }, ref) => {
     const [show, setShow] = useState(false);
 
     return (
-      <SInput.InputWrapper>
-        {label && <SInput.Label>{label}</SInput.Label>}
+      <S.InputWrapper>
+        {label && <S.Label>{label}</S.Label>}
         <div style={{ position: "relative", width: "100%" }}>
-          <SInput.Input
+          <S.Input
             color={color}
             ref={ref}
+            size={size}
             {...props}
             type={show ? "text" : "password"}
           />
@@ -35,7 +35,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
             {show ? <Eye /> : <EyeOff />}
           </ToggleButton>
         </div>
-      </SInput.InputWrapper>
+      </S.InputWrapper>
     );
   },
 );

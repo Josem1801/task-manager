@@ -4,14 +4,30 @@ import * as S from "./input-field.styles";
 
 type InputFieldProps = {
   label?: string;
-} & React.InputHTMLAttributes<HTMLInputElement> &
-  S.Props;
+} & S.Props &
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">;
 
 export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, variant = "default", color = "secondary", ...props }, ref) => (
-    <S.InputWrapper>
+  (
+    {
+      label,
+      variant = "default",
+      color = "secondary",
+      size = "medium",
+      style,
+      ...props
+    },
+    ref,
+  ) => (
+    <S.InputWrapper style={style}>
       {label && <S.Label>{label}</S.Label>}
-      <S.Input color={color} ref={ref} variant={variant} {...props} />
+      <S.Input
+        color={color}
+        ref={ref}
+        size={size}
+        variant={variant}
+        {...props}
+      />
     </S.InputWrapper>
   ),
 );

@@ -1,6 +1,8 @@
-import React, { HTMLAttributes, PropsWithChildren } from "react";
+import React from "react";
 
 import * as S from "./button-icon.styles";
+
+type ButtonIconProps = React.ButtonHTMLAttributes<HTMLButtonElement> & S.Props;
 
 export const ButtonIcon = ({
   children,
@@ -9,7 +11,7 @@ export const ButtonIcon = ({
   variant,
   size,
   ...props
-}: PropsWithChildren<HTMLAttributes<HTMLButtonElement> & Partial<S.Props>>) => {
+}: ButtonIconProps) => {
   return (
     <S.ButtonIconContainer
       {...props}

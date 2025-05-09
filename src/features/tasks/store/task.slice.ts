@@ -62,6 +62,16 @@ export const taskSlice = createSlice({
       if (!state.tasks[task.id]) return;
       state.tasks[task.id] = task;
     },
+
+    updateColumnName: (
+      state,
+      action: PayloadAction<{ id: string; title: string }>,
+    ) => {
+      const { id, title } = action.payload;
+
+      if (!state.columns[id]) return;
+      state.columns[id].title = title;
+    },
     reset: () => initialState,
   },
   extraReducers: (builder) => {
