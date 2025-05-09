@@ -7,7 +7,7 @@ export const LogoutButton = () => {
   const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
-    dispatch(AuthActions.logoutUser());
+    dispatch(AuthActions.logout());
   };
 
   return <Button onClick={handleLogout}>Logout</Button>;

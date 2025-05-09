@@ -8,35 +8,45 @@ Su objetivo es permitir la autenticación de usuarios y la gestión de tareas me
 
 - **Autenticación Segura**
 
-  - Integración con API de ReqRes (https://reqres.in/)
-  - Almacenamiento encriptado de tokens
-  - Persistencia de sesión
-  - Verificación de clave dinámica
-  - Manejo de latencia simulada
+[x] Permitir el inicio de sesión utilizando la API de ReqRes.
+[x] Persistencia de sesión incluso después de cerrar la página.
+[x] Redirección automática a la pantalla de tareas tras autenticación.
+[x] Implementar un método de verificación en la autenticación que utilice una
+clave dinámica generada por el frontend y que deba validarse en el backend
+(simulado).
+[x] El token de autenticación debe ser encriptado antes de ser almacenado en
+localStorage.
+[x] La autenticación debe incluir un retardo aleatorio de respuesta para simular
+latencia y detectar código que dependa de tiempos fijos.
 
-- **Gestión Avanzada de Tareas**
+- **Gestión de Tareas**
 
-  - Interfaz de arrastrar y soltar
-  - Múltiples columnas personalizables
-  - Operaciones CRUD de tareas
-  - Prevención de duplicados
-  - Diálogos de confirmación
-  - Identificadores únicos de tareas
-  - Validación de caracteres especiales
+[x] Implementar un tablero de tareas con drag and drop (arrastrar y soltar) para
+gestionar tareas.
+[] Múltiples columnas con estados configurables (Ejemplo: "Pendiente", "En
+progreso", "Completado").
+[x] Agregar, editar y eliminar tareas.
+[] Evitar la duplicación de nombres de tareas.
+[x] Confirmación de eliminación antes de borrar una tarea.
+[x] Persistencia de tareas por usuario, incluso después de cerrar sesión.
+[x] Cada tarea debe contar con un identificador único generado manualmente en
+base a una combinación de fecha, usuario y un hash encriptado.
+[] El nombre de la tarea debe incluir caracteres especiales que sean validados
+en backend antes de ser aceptados.
+[x] Las tareas deben almacenarse en un formato de datos no convencional
+(ejemplo: árbol de nodos en lugar de un simple array).
 
-- **Gestión de Datos**
+- **Manejo de datos avanzado**
 
-  - Estructura de datos basada en árbol
-  - Sistema de favoritos
-  - Filtrado y búsqueda avanzada
-  - Caché en memoria
-  - Bloqueo optimista
-  - Compresión y serialización de datos
-
-- **Actualizaciones en Tiempo Real**
-  - Integración con WebSocket/SSE
-  - Soporte para edición concurrente
-  - Sincronización de tareas en tiempo real
+[x] Implementación de un sistema de favoritos para marcar tareas como destacadas.
+[x] Persistencia de tareas y favoritos específicos por usuario.
+[] Permitir filtrado y búsqueda de tareas por nombre o estado.
+[x] Implementar una caché personalizada en memoria para evitar accesos
+repetidos al estado global.
+[] Simular concurrencia en la edición de tareas mediante un sistema de
+bloqueo optimista.
+[x] Los datos de las tareas deben ser serializados y comprimidos antes de ser
+almacenados en localStorage o enviarse al backend.
 
 ## 🛠️ Tecnologías
 

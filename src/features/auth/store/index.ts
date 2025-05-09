@@ -1,9 +1,7 @@
 import { authSlice } from "./auth.slice";
-import { logoutUser } from "./auth.thunk";
 
 const AuthActions = {
   ...authSlice.actions,
-  logoutUser,
 };
 
 export { AuthActions };

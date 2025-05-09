@@ -7,22 +7,13 @@ const initialState: TAuthState = {
   isAuthenticated: false,
   token: null,
   profile: null,
-  loading: false,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.isAuthenticated = false;
-      state.token = null;
-      state.profile = null;
-      state.loading = false;
-    },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
+    logout: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addMatcher(

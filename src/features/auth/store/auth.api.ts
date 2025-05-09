@@ -1,4 +1,4 @@
-import { encryptToken, simulateLatency } from "@/shared/encryption";
+import { simulateLatency } from "@/shared/encryption";
 import baseApi from "@/shared/store/store.api";
 
 import {
@@ -21,16 +21,14 @@ export const authApi = baseApi
         }),
         transformResponse: async (response: TLoginResponse) => {
           await simulateLatency(1000, 3000);
+
           return response;
         },
       }),
       validateToken: build.query<TProfile, string>({
         query: (token) => ({
-          url: `/unknown/2`,
+          url: `/unknown/${token}`,
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }),
         transformResponse: (response: { data: TProfile }) => response?.data,
       }),

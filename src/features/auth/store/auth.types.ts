@@ -2,7 +2,6 @@ export type TAuthState = {
   isAuthenticated: boolean;
   token: string | null;
   profile: TProfile | null;
-  loading: boolean;
 };
 
 export type TProfile = {
