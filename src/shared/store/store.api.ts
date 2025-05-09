@@ -9,11 +9,12 @@ const baseApi = createApi({
     baseUrl: `${API_URL}/api`,
     prepareHeaders: (headers, { getState }) => {
       headers.set("x-api-key", "reqres-free-v1");
-      const token = (getState() as RootState).auth.token;
+      const { token } = (getState() as RootState).auth;
 
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
+
       return headers;
     },
   }),

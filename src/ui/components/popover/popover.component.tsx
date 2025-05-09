@@ -9,7 +9,7 @@ type PopoverProps = {
 
 export const Popover = ({ content, children }: PopoverProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const popoverRef = useRef(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
 
   const togglePopover = () => {
     setIsOpen(!isOpen);
@@ -19,13 +19,14 @@ export const Popover = ({ content, children }: PopoverProps) => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         popoverRef.current &&
-        // @ts-ignore - contains is a method of current
         !popoverRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };

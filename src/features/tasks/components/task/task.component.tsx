@@ -8,8 +8,6 @@ import { Typography } from "@/ui/components/typography";
 import { DeleteOutline } from "@/ui/icons/delete-outline";
 import { DotsHorizontal } from "@/ui/icons/dots-horizontal";
 import { EditOutline } from "@/ui/icons/edit-outline";
-import { HeartFill } from "@/ui/icons/heart-fill";
-import { HeartOutline } from "@/ui/icons/heart-outline";
 
 import type { TBoardTask } from "@/features/tasks/store/task.types";
 
@@ -61,23 +59,23 @@ export const Task = ({ task, onFavorite, onDelete, onEdit }: TaskProps) => {
             content={(close) => (
               <Box display="flex" flexDirection="column">
                 <Button
-                  variant="transparent"
-                  style={btnStyles}
                   onClick={() => {
                     handleEdit();
                     close();
                   }}
+                  style={btnStyles}
+                  variant="transparent"
                 >
                   <EditOutline />
                   Editar
                 </Button>
                 <Button
-                  variant="transparent"
-                  style={btnStyles}
                   onClick={() => {
                     handleDelete();
                     close();
                   }}
+                  style={btnStyles}
+                  variant="transparent"
                 >
                   <DeleteOutline />
                   Eliminar

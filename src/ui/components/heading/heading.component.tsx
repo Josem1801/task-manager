@@ -15,6 +15,7 @@ export type HeadingProps = {
 
 type HeadingComponentProps = React.ComponentPropsWithoutRef<"h1"> &
   HeadingProps;
+
 export const Heading = ({
   variant,
   color = "primary",
@@ -26,10 +27,10 @@ export const Heading = ({
   return (
     <SHeading
       as={variant}
-      variant={variant}
       color={color}
-      weight={weight}
       underline={underline}
+      variant={variant}
+      weight={weight}
       {...props}
     >
       {children}

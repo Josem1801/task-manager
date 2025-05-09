@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { useAppSelector } from "@/shared/store/types";
 import { Button } from "@/ui/components/button";
 import { InputField } from "@/ui/components/input-filed";
 import { Modal, ModalProps } from "@/ui/components/modal";
@@ -29,6 +28,7 @@ export const CreateTaskModal = ({
     resolver: yupResolver(createTaskSchema),
     values: useMemo(() => {
       if (!defaultValues) return undefined;
+
       return {
         name: defaultValues.name,
         description: defaultValues.description || "",
@@ -44,14 +44,14 @@ export const CreateTaskModal = ({
       name: "",
       description: "",
     });
-  }, [methods.formState.isSubmitSuccessful]);
+  }, [methods, methods.formState.isSubmitSuccessful]);
 
   return (
     <Modal {...modal}>
       <SForm onSubmit={handleSubmit}>
         <InputField {...methods.register("name")} label="Task name" />
         <Textarea {...methods.register("description")} label="Description" />
-        <Button type="submit" loading={loading}>
+        <Button loading={loading} type="submit">
           {defaultValues ? "Update" : "Create"}
         </Button>
       </SForm>

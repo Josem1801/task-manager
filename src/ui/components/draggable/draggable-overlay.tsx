@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 
-import { DragOverlay, useDndContext } from "@dnd-kit/core";
+import { DragOverlay } from "@dnd-kit/core";
 import type { DropAnimation } from "@dnd-kit/core";
 
 import { dropAnimationConfig } from "./draggable.config";

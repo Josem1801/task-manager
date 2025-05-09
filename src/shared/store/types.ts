@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { ThunkDispatch } from "@reduxjs/toolkit";
-
 import { rootReducer, store } from "./store.config";
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -11,7 +11,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, variant = "default", color = "secondary", ...props }, ref) => (
     <S.InputWrapper>
       {label && <S.Label>{label}</S.Label>}
-      <S.Input ref={ref} variant={variant} color={color} {...props} />
+      <S.Input color={color} ref={ref} variant={variant} {...props} />
     </S.InputWrapper>
   ),
 );

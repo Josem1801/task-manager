@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Spinner } from "@/ui/icons/spinner";
-import { ThemeType } from "@/ui/styled";
 
 import { Button as SButton } from "./button.styles";
 
@@ -19,10 +18,16 @@ export const Button = ({
   size = "medium",
   children,
   loading,
+  disabled,
   ...props
 }: ButtonProps) => {
   return (
-    <SButton variant={variant} size={size} {...props}>
+    <SButton
+      {...props}
+      disabled={loading || disabled}
+      size={size}
+      variant={variant}
+    >
       {loading ? <Spinner /> : children}
     </SButton>
   );

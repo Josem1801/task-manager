@@ -42,6 +42,7 @@ const hiddenAtBreakpoints: Record<"mobile" | "tablet" | "desktop", number> = {
 const setStyle = (prop?: string | number, cssProp?: string) => {
   if (!prop) return "";
   if (typeof prop === "number") return `${cssProp}: ${prop}px;`;
+
   return `${cssProp}: ${prop};`;
 };
 

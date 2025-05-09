@@ -17,22 +17,22 @@ type Props = {
 export const ModalConfirmation = (props: Props) => {
   return (
     <Modal {...props.modal} size="small">
-      <Box padding={4} display="grid" columns={1} gap={24}>
+      <Box columns={1} display="grid" gap={24} padding={4}>
         <Box display="grid" gap={4}>
           <Typography variant="xlarge" weight="bold">
             {props.title}
           </Typography>
           <Typography variant="medium">{props.description}</Typography>
         </Box>
-        <Box display="flex" justifyContent="space-around" gap={1}>
+        <Box display="flex" gap={1} justifyContent="space-around">
           <Button
-            variant="outline"
-            onClick={props.onCancel}
             disabled={props.loading}
+            onClick={props.onCancel}
+            variant="outline"
           >
             Cancel
           </Button>
-          <Button onClick={props.onConfirm} loading={props.loading}>
+          <Button loading={props.loading} onClick={props.onConfirm}>
             Confirm
           </Button>
         </Box>

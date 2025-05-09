@@ -1,4 +1,3 @@
-import { ThemeType } from "@/ui/styled";
 import styled, { css } from "styled-components";
 
 import { HeadingProps } from "./heading.component";

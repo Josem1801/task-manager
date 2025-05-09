@@ -11,8 +11,10 @@ export function useDisclosure(
     setOpened((isOpened) => {
       if (!isOpened) {
         onOpen?.();
+
         return true;
       }
+
       return isOpened;
     });
   }, [onOpen]);
@@ -21,14 +23,17 @@ export function useDisclosure(
     setOpened((isOpened) => {
       if (isOpened) {
         onClose?.();
+
         return false;
       }
+
       return isOpened;
     });
   }, [onClose]);
 
   const toggle = useCallback(() => {
-    opened ? close() : open();
+    if (opened) close();
+    else open();
   }, [close, open, opened]);
 
   return { opened, open, close, toggle };

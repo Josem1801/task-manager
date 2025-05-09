@@ -67,12 +67,12 @@ export function BoardDnD({ renderColumn }: Props) {
   return (
     <BoardLayout>
       <DndContext
-        sensors={sensors}
         collisionDetection={closestCorners}
-        onDragStart={drag.handleDragStart}
-        onDragEnd={drag.handleDragEnd}
         onDragCancel={drag.handleDragCancel}
+        onDragEnd={drag.handleDragEnd}
         onDragOver={drag.handleDragOver}
+        onDragStart={drag.handleDragStart}
+        sensors={sensors}
       >
         {Object.keys(columnsCache).map((columnId) => (
           <Fragment key={columnId}>

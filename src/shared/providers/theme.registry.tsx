@@ -15,7 +15,9 @@ export default function ThemeRegistryProvider({
 
   useServerInsertedHTML(() => {
     const styles = styledComponentsStyleSheet.getStyleElement();
+
     styledComponentsStyleSheet.instance.clearTag();
+
     return <>{styles}</>;
   });
 

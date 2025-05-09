@@ -11,6 +11,7 @@ export const encryptCompressTransform = createTransform(
     const json = JSON.stringify(inboundState);
     const compressed = LZString.compressToUTF16(json);
     const encrypted = CryptoJS.AES.encrypt(compressed, SECRET_KEY).toString();
+
     return encrypted;
   },
   // transform state being rehydrated
@@ -19,9 +20,11 @@ export const encryptCompressTransform = createTransform(
       const bytes = CryptoJS.AES.decrypt(outboundState, SECRET_KEY);
       const decrypted = bytes.toString(CryptoJS.enc.Utf8);
       const decompressed = LZString.decompressFromUTF16(decrypted);
+
       return JSON.parse(decompressed || "{}");
     } catch (error) {
       console.error("Failed to decrypt or decompress persisted state:", error);
+
       return {};
     }
   },

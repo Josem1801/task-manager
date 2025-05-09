@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 
-import { useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 type SortableItemProps = {
   id: string;
   children: React.ReactNode;
-  data?: any;
 };
+
 export const Sortable = (props: SortableItemProps) => {
-  const { id, data, children } = props;
+  const { id, children } = props;
   const {
     attributes,
     listeners,
@@ -17,11 +17,12 @@ export const Sortable = (props: SortableItemProps) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id, data });
+  } = useSortable({ id });
 
   useEffect(() => {
     if (!isDragging) return;
     document.body.style.cursor = "grabbing";
+
     return () => {
       document.body.style.cursor = "";
     };

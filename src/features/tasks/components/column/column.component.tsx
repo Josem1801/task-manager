@@ -24,7 +24,7 @@ export const BoardColumn = ({ column, children, onAddTask }: Props) => {
       <BoardSectionHeader>
         <Heading variant="header">{column.title}</Heading>
         <div>
-          <ButtonIcon variant="primary" onClick={onAddTask}>
+          <ButtonIcon onClick={onAddTask} variant="primary">
             <Add />
           </ButtonIcon>
         </div>

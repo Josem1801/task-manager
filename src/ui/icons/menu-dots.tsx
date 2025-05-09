@@ -8,16 +8,17 @@ const SvgComponent = ({
   ...props
 }: SVGProps<SVGSVGElement>) => (
   <svg
-    width="1em"
+    fill="none"
     height="1em"
     viewBox="0 0 21 22"
-    fill="none"
+    width="1em"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <circle cx={5.5} cy={11.1667} r={1.5} fill={color} />
-    <circle cx={10.5} cy={11.1667} r={1.5} fill={color} />
-    <circle cx={15.5} cy={11.1667} r={1.5} fill={color} />
+    <circle cx={5.5} cy={11.1667} fill={color} r={1.5} />
+    <circle cx={10.5} cy={11.1667} fill={color} r={1.5} />
+    <circle cx={15.5} cy={11.1667} fill={color} r={1.5} />
   </svg>
 );
+
 export { SvgComponent as MenuDots };

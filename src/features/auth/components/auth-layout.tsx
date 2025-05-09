@@ -1,10 +1,10 @@
 "use client";
 
-import { PropsWithChildren, useEffect, useId, useLayoutEffect } from "react";
+import { PropsWithChildren, useEffect, useId } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 
-import { useAppDispatch, useAppSelector } from "@/shared/store/types";
+import { useAppSelector } from "@/shared/store/types";
 import { Box } from "@/ui/components/box";
 import { Spinner } from "@/ui/icons/spinner";
 
@@ -28,24 +28,26 @@ export const AuthLayout = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (validateToken.isFetching) return;
+
     if (!authState.isAuthenticated) {
       if (!isPublicRoute) router.replace(TO_LOGIN_PATH);
     }
+
     if (authState.isAuthenticated) {
       if (isPublicRoute) router.replace(TO_HOME_PATH);
     }
-  }, [authState, isPublicRoute, validateToken.isFetching]);
+  }, [authState, isPublicRoute, router, validateToken.isFetching]);
 
   if (validateToken.isFetching) {
     return (
       <Box
+        alignItems="center"
         columns={1}
         display="flex"
-        justifyContent="center"
-        alignItems="center"
         height="100dvh"
+        justifyContent="center"
       >
-        <Spinner width={40} height={40} />
+        <Spinner height={40} width={40} />
       </Box>
     );
   }

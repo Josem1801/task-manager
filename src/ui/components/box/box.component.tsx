@@ -21,17 +21,17 @@ export const Box = ({
 }: BoxProps) => {
   return (
     <SBox
-      display={display}
-      justifyContent={justifyContent}
       alignItems={alignItems}
-      flexDirection={flexDirection}
-      gap={gap}
-      padding={padding}
-      margin={margin}
-      width={width}
-      height={height}
       bg={bg}
       borderRadius={borderRadius}
+      display={display}
+      flexDirection={flexDirection}
+      gap={gap}
+      height={height}
+      justifyContent={justifyContent}
+      margin={margin}
+      padding={padding}
+      width={width}
       {...props}
     >
       {children}

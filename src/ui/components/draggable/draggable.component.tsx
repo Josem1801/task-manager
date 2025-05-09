@@ -29,14 +29,14 @@ export const Draggable = forwardRef<HTMLDivElement, Props>(function Draggable(
 ) {
   return (
     <DraggableContainer
-      ref={ref}
-      pendingDelay={isPendingDelay}
       dragging={dragging}
       dragOverlay={dragOverlay}
-      transform={transform}
+      pendingDelay={isPendingDelay}
+      ref={ref}
       style={{
         opacity: dragging ? 0.5 : 1,
       }}
+      transform={transform}
       {...props}
     >
       {props.children}

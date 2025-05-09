@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo, useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import { useDisclosure } from "@/shared/hooks/use-disclosure";
 import { useAppDispatch, useAppSelector } from "@/shared/store/types";
@@ -13,7 +13,7 @@ import {
   CreateTaskSchema,
 } from "@/features/tasks/components/create-task-modal";
 import { Task } from "@/features/tasks/components/task";
-import { TaskActions, TaskSelector } from "@/features/tasks/store";
+import { TaskActions } from "@/features/tasks/store";
 import {
   useCreateTaskMutation,
   useDeleteTaskMutation,
@@ -54,6 +54,7 @@ export const TaskBoard = () => {
 
   const handleEditTask = async (data: CreateTaskSchema) => {
     if (!selectedTask) return;
+
     try {
       await updateTask({
         ...selectedTask,
@@ -67,6 +68,7 @@ export const TaskBoard = () => {
 
   const handleDeleteTask = async () => {
     if (!selectedTask) return;
+
     try {
       await deleteTask(selectedTask.id).unwrap();
       deleteTaskModal.close();
@@ -93,21 +95,22 @@ export const TaskBoard = () => {
     setSelectedTask(data);
     deleteTaskModal.open();
   };
+
   return (
     <Fragment>
       <BoardDnD
         renderColumn={({ columnId, columns, tasks }) => (
           <Droppable
             id={columnId}
-            key={columnId}
             items={columns[columnId].tasks}
+            key={columnId}
           >
             <BoardColumn
               column={columns[columnId]}
               onAddTask={() => handleAddTaskModal(columnId)}
             >
               {columns[columnId].tasks.map((taskId: string) => (
-                <Sortable key={taskId} id={taskId} data={{ columnId }}>
+                <Sortable id={taskId} key={taskId}>
                   <Task
                     onDelete={handleDeleteTaskModal}
                     onEdit={handleEditTaskModal}
@@ -122,23 +125,23 @@ export const TaskBoard = () => {
       />
       {/* Modals */}
       <CreateTaskModal
+        loading={createTaskResult.isLoading}
         modal={createTaskModal}
         onSubmit={handleAddTask}
-        loading={createTaskResult.isLoading}
       />
       <CreateTaskModal
+        defaultValues={selectedTask}
+        loading={updateTaskResult.isLoading}
         modal={updateTaskModal}
         onSubmit={handleEditTask}
-        loading={updateTaskResult.isLoading}
-        defaultValues={selectedTask}
       />
       <ModalConfirmation
-        modal={deleteTaskModal}
-        title="Delete Task"
         description="Are you sure you want to delete this task?"
-        onConfirm={handleDeleteTask}
-        onCancel={deleteTaskModal.close}
         loading={deleteTaskResult.isLoading}
+        modal={deleteTaskModal}
+        onCancel={deleteTaskModal.close}
+        onConfirm={handleDeleteTask}
+        title="Delete Task"
       />
     </Fragment>
   );

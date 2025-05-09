@@ -16,6 +16,7 @@ function shouldForwardProp(propName: string, target: WebTarget) {
     // For HTML elements, forward the prop if it is a valid HTML attribute
     return isPropValid(propName);
   }
+
   // For other elements, forward all props
   return true;
 }

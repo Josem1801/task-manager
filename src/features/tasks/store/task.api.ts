@@ -45,7 +45,6 @@ export const taskApi = baseApi
           method: "DELETE",
         }),
         transformResponse: (_, __, arg) => {
-          console.log(_, __, arg);
           return arg;
         },
       }),

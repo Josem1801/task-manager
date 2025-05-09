@@ -13,10 +13,10 @@ export const ButtonIcon = ({
   return (
     <S.ButtonIconContainer
       {...props}
-      onClick={onClick}
       isActive={isActive}
-      variant={variant}
+      onClick={onClick}
       size={size || "medium"}
+      variant={variant}
     >
       {children}
     </S.ButtonIconContainer>

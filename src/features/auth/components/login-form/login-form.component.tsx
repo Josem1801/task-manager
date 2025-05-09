@@ -16,7 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthMutation } from "@/features/auth/store/auth.api";
 
 import { loginSchema } from "./login-form.const";
-import { Form, FormContainer } from "./login-form.styles";
+import { Form } from "./login-form.styles";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -36,14 +36,14 @@ export const LoginForm = () => {
 
   return (
     <Box
+      border="1px solid #00000025"
+      borderRadius={12}
       display="flex"
       flexDirection="column"
-      borderRadius={12}
-      padding={40}
       gap={40}
       maxWidth={450}
+      padding={40}
       width="100%"
-      border="1px solid #00000025"
     >
       <Heading variant="h1" weight="normal">
         Welcome !
@@ -64,21 +64,21 @@ export const LoginForm = () => {
           <InputField
             label="Email"
             {...methods.register("email")}
-            type="email"
             id="email"
             name="email"
             required
+            type="email"
           />
           <InputPassword
             label="Password"
             {...methods.register("password")}
-            type="password"
             id="password"
             name="password"
             required
+            type="password"
           />
         </Box>
-        <Button size="large" type="submit" loading={login.isLoading}>
+        <Button loading={login.isLoading} size="large" type="submit">
           Login
         </Button>
       </Form>

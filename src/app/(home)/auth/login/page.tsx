@@ -10,24 +10,24 @@ export default function Login() {
   return (
     <Box
       display="flex"
-      justifyContent="space-between"
       gap={40}
+      justifyContent="space-between"
+      margin="auto"
       maxWidth="desktop"
       width="100%"
-      margin="auto"
     >
-      <Box width="100%" display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="center" width="100%">
         <LoginForm />
       </Box>
       <Box
-        hiddenAt="tablet"
-        display="flex"
-        justifyContent="center"
         alignItems="center"
-        width="100%"
+        display="flex"
+        hiddenAt="tablet"
+        justifyContent="center"
         position="relative"
+        width="100%"
       >
-        <Image src="/images/login.svg" alt="login" fill />
+        <Image alt="login" fill src="/images/login.svg" />
       </Box>
     </Box>
   );

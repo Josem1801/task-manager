@@ -25,8 +25,8 @@ export const Typography = ({
   return (
     <STypography
       as={as}
-      variant={variant}
       color={color}
+      variant={variant}
       weight={weight}
       {...props}
     >

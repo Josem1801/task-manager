@@ -6,7 +6,7 @@ import { TaskBoard } from "@/features/tasks/components/task-board/task-board.com
 
 export default function Page() {
   return (
-    <Box maxWidth="desktop" width="100%" margin="2rem auto">
+    <Box margin="2rem auto" maxWidth="desktop" width="100%">
       <TaskBoard />
     </Box>
   );

@@ -26,8 +26,8 @@ export const Modal = (props: Props) => {
   return (
     <ModalContainer isOpen={props.opened} onClick={props.close}>
       <ModalContent onClick={(e) => e.stopPropagation()} size={props.size}>
-        <Box position="absolute" top={3} right={3}>
-          <ButtonIcon variant="primary" size="large" onClick={props.close}>
+        <Box position="absolute" right={3} top={3}>
+          <ButtonIcon onClick={props.close} size="large" variant="primary">
             <Close />
           </ButtonIcon>
         </Box>

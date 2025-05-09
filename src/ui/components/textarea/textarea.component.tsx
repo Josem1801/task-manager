@@ -16,7 +16,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, variant = "default", color = "secondary", ...props }, ref) => (
     <S.InputWrapper>
       {label && <S.Label>{label}</S.Label>}
-      <S.Textarea ref={ref} variant={variant} color={color} {...props} />
+      <S.Textarea color={color} ref={ref} variant={variant} {...props} />
     </S.InputWrapper>
   ),
 );

@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { useAppSelector } from "@/shared/store/types";
 import {
   DragEndEvent,
   DragOverEvent,
@@ -31,11 +30,13 @@ export const useDndDragTaskEvents = ({
 
   function findContainer(id: string) {
     if (id in columns) return id;
+
     return Object.keys(columns).find((key) => columns[key].tasks.includes(id));
   }
 
   const handleDragOver = (event: DragOverEvent) => {
     const { delta, over, active } = event;
+
     if (delta.x === 0 && delta.y === 0) return;
     if (!over?.id || !active?.id) return;
 
@@ -58,11 +59,13 @@ export const useDndDragTaskEvents = ({
     const overIndex = overItems.findIndex((item) => item === over.id);
 
     let newIndex;
+
     if (over.id in columns) {
       newIndex = overItems.length + 1;
     } else {
       const isBelowLastItem = over && overIndex === overItems.length - 1;
       const modifier = isBelowLastItem ? 1 : 0;
+
       newIndex = overIndex >= 0 ? overIndex + modifier : overItems.length + 1;
     }
 
@@ -88,7 +91,7 @@ export const useDndDragTaskEvents = ({
     const columnId = active.data.current?.columnId as string;
 
     if (active.id !== over.id) {
-      const tasks = columns[columnId].tasks;
+      const { tasks } = columns[columnId];
       const oldIdx = tasks.indexOf(String(active.id));
       const newIdx = tasks.indexOf(String(over.id));
       const sortedTasks = arrayMove(tasks, oldIdx, newIdx);

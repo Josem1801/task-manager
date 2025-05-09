@@ -12,17 +12,18 @@ import { AuthSelector } from "@/features/auth/store";
 
 const BoardLayout = ({ children }: PropsWithChildren) => {
   const profile = useAppSelector(AuthSelector.getProfile);
+
   return (
     <Box
-      maxWidth="desktop"
-      width="100%"
-      display="grid"
-      margin="2rem auto"
       columns={1}
-      padding="0 3rem"
+      display="grid"
       gap={20}
+      margin="2rem auto"
+      maxWidth="desktop"
+      padding="0 3rem"
+      width="100%"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box alignItems="center" display="flex" justifyContent="space-between">
         <span>
           <Heading style={{ textDecoration: "underline" }} variant="h1">
             Hi {profile?.name} 👋!
