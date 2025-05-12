@@ -17,7 +17,7 @@ export type TypographyProps = {
 export const Typography = ({
   as = "span",
   variant = "medium",
-  color = "primary",
+  color = "secondary",
   weight = "normal",
   children,
   ...props

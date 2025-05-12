@@ -7,6 +7,7 @@ const initialState: TAuthState = {
   isAuthenticated: false,
   token: null,
   profile: null,
+  loading: false,
 };
 
 export const authSlice = createSlice({
@@ -27,6 +28,7 @@ export const authSlice = createSlice({
       authApi.endpoints.validateToken.matchFulfilled,
       (state, action) => {
         state.profile = action.payload;
+        state.loading = false;
       },
     );
   },

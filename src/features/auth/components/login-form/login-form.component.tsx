@@ -5,16 +5,19 @@ import { useForm } from "react-hook-form";
 
 import { useRouter } from "next/navigation";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+
+import { useAuthMutation } from "@/features/auth/store/auth.api";
+
 import { Box } from "@/ui/components/box";
 import { Button } from "@/ui/components/button";
 import { Heading } from "@/ui/components/heading";
 import { InputField } from "@/ui/components/input-filed";
 import { InputPassword } from "@/ui/components/input-password";
 import { Typography } from "@/ui/components/typography";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useAuthMutation } from "@/features/auth/store/auth.api";
-
+import { TLoginError } from "../../store/auth.types";
 import { loginSchema } from "./login-form.const";
 import { Form } from "./login-form.styles";
 
@@ -29,8 +32,12 @@ export const LoginForm = () => {
     try {
       await loginMutation(data).unwrap();
       router.refresh();
-    } catch (error) {
-      console.error("Login failed:", error);
+    } catch (error: unknown) {
+      const catchError = error as FetchBaseQueryError;
+      const errorMessage = catchError?.data as TLoginError;
+
+      methods.setError("password", { message: errorMessage.error });
+      methods.setError("email", { message: "" });
     }
   });
 
@@ -50,7 +57,7 @@ export const LoginForm = () => {
       </Heading>
       <Box>
         <Heading variant="h2">Sign in to</Heading>
-        <Typography color="primary">
+        <Typography color="secondary">
           Enter and take control of your tasks
         </Typography>
       </Box>
@@ -70,19 +77,19 @@ export const LoginForm = () => {
             required
             type="email"
           />
-          <InputPassword
-            {...methods.register("password")}
-            error={methods.formState.errors.password?.message}
-            id="password"
-            label="Password"
-            name="password"
-            required
-            type="password"
-          />
+          <Box>
+            <InputPassword
+              {...methods.register("password")}
+              error={methods.formState.errors.password?.message}
+              id="password"
+              label="Password"
+              name="password"
+              required
+              type="password"
+            />
+          </Box>
         </Box>
-        {login.isError && (
-          <Typography color="error">{JSON.stringify(login.error)}</Typography>
-        )}
+
         <Button loading={login.isLoading} size="large" type="submit">
           Login
         </Button>

@@ -6,6 +6,7 @@ export const theme = {
     light: "#EEF2F5",
     gray: "#808080",
     error: "#FF0000",
+    success: "#00FF00",
   },
   breakpoints: {
     mobile: "480px",

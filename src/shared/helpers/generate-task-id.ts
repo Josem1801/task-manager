@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 
-import { EncryptionKeys } from "../encryption";
+import { EncryptionKeys } from "./encryption";
 
 export const generateTaskId = (userId: string): string => {
   const timestamp = new Date().toISOString();
@@ -11,5 +11,13 @@ export const generateTaskId = (userId: string): string => {
   ).toString();
 
   //  Use the timestamp, userId, and hash to create a unique ID
-  return `${timestamp}-${userId}-${hash}`;
+  const id = `${timestamp}-${userId}-${hash}`;
+
+  // Encrypt the ID
+  const encryptedId = CryptoJS.AES.encrypt(
+    id,
+    EncryptionKeys.taskId,
+  ).toString();
+
+  return encryptedId;
 };

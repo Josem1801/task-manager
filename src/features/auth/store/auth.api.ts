@@ -1,4 +1,4 @@
-import { simulateLatency } from "@/shared/encryption";
+import { simulateLatency } from "@/shared/helpers/encryption";
 import baseApi from "@/shared/store/store.api";
 
 import {

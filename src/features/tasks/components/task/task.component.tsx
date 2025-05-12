@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { TBoardTask } from "@/features/tasks/store/task.types";
+
 import { Box } from "@/ui/components/box";
 import { Button } from "@/ui/components/button";
 import { ButtonIcon } from "@/ui/components/button-icon";
@@ -8,8 +10,6 @@ import { Typography } from "@/ui/components/typography";
 import { DeleteOutline } from "@/ui/icons/delete-outline";
 import { DotsHorizontal } from "@/ui/icons/dots-horizontal";
 import { EditOutline } from "@/ui/icons/edit-outline";
-
-import type { TBoardTask } from "@/features/tasks/store/task.types";
 
 import {
   FlexContainer,

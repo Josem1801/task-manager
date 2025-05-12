@@ -37,7 +37,7 @@ const variantStyles = {
 };
 
 export const Typography = styled.span<TypographyProps>`
-  ${({ color, theme }) => `color: ${color || theme.colors.secondary}`}
-  ${({ variant }) => variant && variantStyles[variant]}
+  ${({ color, theme }) => `color: ${theme.colors[color || "secondary"]}`};
+  ${({ variant }) => variant && variantStyles[variant]};
   font-weight: ${({ weight }) => weights[weight || "normal"]};
 `;

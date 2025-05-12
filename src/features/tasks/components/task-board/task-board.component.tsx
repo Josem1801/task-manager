@@ -1,15 +1,17 @@
 import React, { Fragment, useState } from "react";
-
-import { useDisclosure } from "@/shared/hooks/use-disclosure";
-import { useAppDispatch } from "@/shared/store/types";
-import { Droppable } from "@/ui/components/droppable";
-import { Sortable } from "@/ui/components/sortable";
+import type { ComponentProps } from "react";
 
 import { BoardColumn } from "@/features/tasks/components/column";
 import { CreateTaskModal } from "@/features/tasks/components/create-task-modal";
 import { Task } from "@/features/tasks/components/task";
 import { TaskActions } from "@/features/tasks/store";
 import { TBoardTask } from "@/features/tasks/store/task.types";
+
+import { useDisclosure } from "@/shared/hooks/use-disclosure";
+import { useAppDispatch } from "@/shared/store/types";
+
+import { Droppable } from "@/ui/components/droppable";
+import { Sortable } from "@/ui/components/sortable";
 
 import { DeleteTaskModal } from "../delete-task-modal";
 import { UpdateTaskModal } from "../update-task-modal";
@@ -44,13 +46,9 @@ export const TaskBoard = () => {
     deleteTaskModal.open();
   };
 
-  const handleEditColumnName = ({
-    id,
-    title,
-  }: {
-    id: string;
-    title: string;
-  }) => {
+  const handleEditColumnName: ComponentProps<
+    typeof BoardColumn
+  >["onUpdateColumnName"] = ({ id, title }) => {
     dispatch(
       TaskActions.updateColumnName({
         id,
@@ -73,16 +71,24 @@ export const TaskBoard = () => {
               onAddTask={() => handleAddTaskModal(columnId)}
               onUpdateColumnName={handleEditColumnName}
             >
-              {columns[columnId].tasks.map((taskId: string) => (
-                <Sortable id={taskId} key={taskId}>
-                  <Task
-                    onDelete={handleDeleteTaskModal}
-                    onEdit={handleEditTaskModal}
-                    onFavorite={handleFavoriteTask}
-                    task={tasks[taskId]}
-                  />
-                </Sortable>
-              ))}
+              {columns[columnId].tasks.map((taskId: string) => {
+                if (!tasks[taskId]) {
+                  console.log(tasks[taskId], taskId);
+
+                  return;
+                }
+
+                return (
+                  <Sortable id={taskId} key={taskId}>
+                    <Task
+                      onDelete={handleDeleteTaskModal}
+                      onEdit={handleEditTaskModal}
+                      onFavorite={handleFavoriteTask}
+                      task={tasks[taskId]}
+                    />
+                  </Sortable>
+                );
+              })}
             </BoardColumn>
           </Droppable>
         )}
