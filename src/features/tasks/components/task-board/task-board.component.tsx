@@ -1,5 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import type { ComponentProps } from "react";
+
+import { useDisclosure } from "@/shared/hooks/use-disclosure";
+import { useAppDispatch } from "@/shared/store/types";
+import { Droppable } from "@/ui/components/droppable";
+import { Sortable } from "@/ui/components/sortable";
 
 import { BoardColumn } from "@/features/tasks/components/column";
 import { CreateTaskModal } from "@/features/tasks/components/create-task-modal";
@@ -7,14 +12,9 @@ import { Task } from "@/features/tasks/components/task";
 import { TaskActions } from "@/features/tasks/store";
 import { TBoardTask } from "@/features/tasks/store/task.types";
 
-import { useDisclosure } from "@/shared/hooks/use-disclosure";
-import { useAppDispatch } from "@/shared/store/types";
-
-import { Droppable } from "@/ui/components/droppable";
-import { Sortable } from "@/ui/components/sortable";
-
 import { DeleteTaskModal } from "../delete-task-modal";
 import { UpdateTaskModal } from "../update-task-modal";
+import { BoardLayout } from "./board.styles";
 import { BoardDnD } from "./task-board.dnd";
 
 export const TaskBoard = () => {
@@ -58,7 +58,7 @@ export const TaskBoard = () => {
   };
 
   return (
-    <Fragment>
+    <BoardLayout>
       <BoardDnD
         renderColumn={({ columnId, columns, tasks }) => (
           <Droppable
@@ -72,14 +72,10 @@ export const TaskBoard = () => {
               onUpdateColumnName={handleEditColumnName}
             >
               {columns[columnId].tasks.map((taskId: string) => {
-                if (!tasks[taskId]) {
-                  console.log(tasks[taskId], taskId);
-
-                  return;
-                }
+                if (!tasks[taskId]) return null;
 
                 return (
-                  <Sortable id={taskId} key={taskId}>
+                  <Sortable data={{ columnId }} id={taskId} key={taskId}>
                     <Task
                       onDelete={handleDeleteTaskModal}
                       onEdit={handleEditTaskModal}
@@ -99,6 +95,6 @@ export const TaskBoard = () => {
       {selectedTask ? (
         <DeleteTaskModal id={selectedTask.id} modal={deleteTaskModal} />
       ) : null}
-    </Fragment>
+    </BoardLayout>
   );
 };

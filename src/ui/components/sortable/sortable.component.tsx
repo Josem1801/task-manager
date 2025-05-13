@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 
-import { useSortable } from "@dnd-kit/sortable";
+import { useSortable, UseSortableArguments } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 type SortableItemProps = {
-  id: string;
   children: React.ReactNode;
-};
+} & UseSortableArguments;
 
 export const Sortable = (props: SortableItemProps) => {
-  const { id, children } = props;
+  const { children, ...sortableProps } = props;
   const {
     attributes,
     listeners,
@@ -17,7 +16,7 @@ export const Sortable = (props: SortableItemProps) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id });
+  } = useSortable(sortableProps);
 
   useEffect(() => {
     if (!isDragging) return;

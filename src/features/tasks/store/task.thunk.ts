@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const validateTaskName = createAsyncThunk(
   "task/validateName",
   async (taskName: string, { getState, rejectWithValue }) => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 200));
     const state = getState() as RootState;
     const existingTasks = Object.values(state.task.tasks);
     const isNameExists = existingTasks.some(

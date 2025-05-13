@@ -17,7 +17,6 @@ import { MoveTaskProps, TBoardState } from "@/features/tasks/store/task.types";
 
 import { useDndDragTaskEvents } from "../../hooks/use-dnd-drag-task-events";
 import { TaskActions, TaskSelector } from "../../store";
-import { BoardLayout } from "./board.styles";
 
 export type SortTaskProps = {
   columnId: string;
@@ -65,30 +64,28 @@ export function BoardDnD({ renderColumn }: Props) {
   });
 
   return (
-    <BoardLayout>
-      <DndContext
-        collisionDetection={closestCorners}
-        onDragCancel={drag.handleDragCancel}
-        onDragEnd={drag.handleDragEnd}
-        onDragOver={drag.handleDragOver}
-        onDragStart={drag.handleDragStart}
-        sensors={sensors}
-      >
-        {Object.keys(columnsCache).map((columnId) => (
-          <Fragment key={columnId}>
-            {renderColumn
-              ? renderColumn({
-                  columnId,
-                  columns: columnsCache,
-                  tasks: tasksCache,
-                })
-              : null}
-          </Fragment>
-        ))}
-        <DraggableOverlay>
-          {drag.activeId ? <Task task={tasks[drag.activeId]} /> : null}
-        </DraggableOverlay>
-      </DndContext>
-    </BoardLayout>
+    <DndContext
+      collisionDetection={closestCorners}
+      onDragCancel={drag.handleDragCancel}
+      onDragEnd={drag.handleDragEnd}
+      onDragOver={drag.handleDragOver}
+      onDragStart={drag.handleDragStart}
+      sensors={sensors}
+    >
+      {Object.keys(columnsCache).map((columnId) => (
+        <Fragment key={columnId}>
+          {renderColumn
+            ? renderColumn({
+                columnId,
+                columns: columnsCache,
+                tasks: tasksCache,
+              })
+            : null}
+        </Fragment>
+      ))}
+      <DraggableOverlay>
+        {drag.activeId ? <Task task={tasks[drag.activeId]} /> : null}
+      </DraggableOverlay>
+    </DndContext>
   );
 }
