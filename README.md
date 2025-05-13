@@ -1,8 +1,6 @@
 # Aplicación de Gestión de Tareas
 
-Este proyecto es una aplicación web desarrollada como parte de una prueba técnica frontend.
-
-Su objetivo es permitir la autenticación de usuarios y la gestión de tareas mediante un sistema de tablero estilo Trello, con funcionalidad de arrastrar y soltar, persistencia de datos y actualizaciones en tiempo real.
+Su objetivo es permitir la autenticación de usuarios y la gestión de tareas mediante un sistema de tablero estilo Trello, con funcionalidad de arrastrar y soltar, persistencia de datos.
 
 ## 🚀 Características
 
@@ -31,8 +29,6 @@ progreso", "Completado").
 [x] Persistencia de tareas por usuario, incluso después de cerrar sesión.
 [x] Cada tarea debe contar con un identificador único generado manualmente en
 base a una combinación de fecha, usuario y un hash encriptado.
-[] El nombre de la tarea debe incluir caracteres especiales que sean validados
-en backend antes de ser aceptados.
 [x] Las tareas deben almacenarse en un formato de datos no convencional
 (ejemplo: árbol de nodos en lugar de un simple array).
 
@@ -40,11 +36,8 @@ en backend antes de ser aceptados.
 
 [x] Implementación de un sistema de favoritos para marcar tareas como destacadas.
 [x] Persistencia de tareas y favoritos específicos por usuario.
-[] Permitir filtrado y búsqueda de tareas por nombre o estado.
 [x] Implementar una caché personalizada en memoria para evitar accesos
 repetidos al estado global.
-[] Simular concurrencia en la edición de tareas mediante un sistema de
-bloqueo optimista.
 [x] Los datos de las tareas deben ser serializados y comprimidos antes de ser
 almacenados en localStorage o enviarse al backend.
 
@@ -54,7 +47,6 @@ almacenados en localStorage o enviarse al backend.
 - **Lenguaje**: TypeScript
 - **Gestión de Estado**: Redux Toolkit
 - **Estilos**: Styled Components
-- **Testing**: Jest + React Testing Library
 - **Manejo de Formularios**: React Hook Form + Yup
 - **Arrastrar y Soltar**: DnD Kit
 - **Encriptación**: CryptoJS
@@ -94,16 +86,6 @@ almacenados en localStorage o enviarse al backend.
 4. **Abrir el navegador**
    Visitar [http://localhost:3000](http://localhost:3000)
 
-## 🧪 Pruebas
-
-Ejecutar el conjunto de pruebas con:
-
-```bash
-npm test
-# o
-yarn test
-```
-
 El proyecto mantiene un mínimo de 50% de cobertura de código.
 
 ## 📦 Construir para Producción
@@ -117,6 +99,7 @@ yarn build
 ## 🏗️ Estructura del Proyecto
 
 ```
+public/                   # Recursos estáticos
 src/
 ├── app/                  # Router de Next.js
 ├── features/             # Caracteristicas especificas de la app
@@ -129,17 +112,13 @@ src/
 │   └── components/       # Componentes reutilizables
 │   └── icons/            # Iconos pasados a componentes
 └── utils/                # Funciones y utilidades
-public/                   # Recursos estáticos
-tests/                    # Archivos de prueba
 ```
 
 ## 🔒 Características de Seguridad
 
 - Almacenamiento local encriptado
-- Gestión segura de sesiones
 - Validación y sanitización de entradas
 - Rutas API protegidas
-- Protección contra CSRF
 
 ## 📊 Estructura de Datos
 
