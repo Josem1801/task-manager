@@ -2,44 +2,47 @@
 
 Su objetivo es permitir la autenticación de usuarios y la gestión de tareas mediante un sistema de tablero estilo Trello, con funcionalidad de arrastrar y soltar, persistencia de datos.
 
+<img src="./public/images/login.png" style="width: 48%; margin-right: 1%;" />
+<img src="./public/images/manager.png" style="width: 48%; " />
+
 ## 🚀 Características
 
 - **Autenticación Segura**
 
-[x] Permitir el inicio de sesión utilizando la API de ReqRes.
-[x] Persistencia de sesión incluso después de cerrar la página.
-[x] Redirección automática a la pantalla de tareas tras autenticación.
-[x] Implementar un método de verificación en la autenticación que utilice una
-clave dinámica generada por el frontend y que deba validarse en el backend
-(simulado).
-[x] El token de autenticación debe ser encriptado antes de ser almacenado en
-localStorage.
-[x] La autenticación debe incluir un retardo aleatorio de respuesta para simular
-latencia y detectar código que dependa de tiempos fijos.
+- [x] Permitir el inicio de sesión utilizando la API de ReqRes.
+- [x] Persistencia de sesión incluso después de cerrar la página.
+- [x] Redirección automática a la pantalla de tareas tras autenticación.
+- [x] Implementar un método de verificación en la autenticación que utilice una
+      clave dinámica generada por el frontend y que deba validarse en el backend
+      (simulado).
+- [x] El token de autenticación debe ser encriptado antes de ser almacenado en
+      localStorage.
+- [x] La autenticación debe incluir un retardo aleatorio de respuesta para simular
+      latencia y detectar código que dependa de tiempos fijos.
 
 - **Gestión de Tareas**
 
-[x] Implementar un tablero de tareas con drag and drop (arrastrar y soltar) para
-gestionar tareas.
-[x] Múltiples columnas con estados configurables (Ejemplo: "Pendiente", "En
-progreso", "Completado").
-[x] Agregar, editar y eliminar tareas.
-[x] Evitar la duplicación de nombres de tareas.
-[x] Confirmación de eliminación antes de borrar una tarea.
-[x] Persistencia de tareas por usuario, incluso después de cerrar sesión.
-[x] Cada tarea debe contar con un identificador único generado manualmente en
-base a una combinación de fecha, usuario y un hash encriptado.
-[x] Las tareas deben almacenarse en un formato de datos no convencional
-(ejemplo: árbol de nodos en lugar de un simple array).
+- [x] Implementar un tablero de tareas con drag and drop (arrastrar y soltar) para
+      gestionar tareas.
+- [x] Múltiples columnas con estados configurables (Ejemplo: "Pendiente", "En
+      progreso", "Completado").
+- [x] Agregar, editar y eliminar tareas.
+- [x] Evitar la duplicación de nombres de tareas.
+- [x] Confirmación de eliminación antes de borrar una tarea.
+- [x] Persistencia de tareas por usuario, incluso después de cerrar sesión.
+- [x] Cada tarea debe contar con un identificador único generado manualmente en
+      base a una combinación de fecha, usuario y un hash encriptado.
+- [x] Las tareas deben almacenarse en un formato de datos no convencional
+      (ejemplo: árbol de nodos en lugar de un simple array).
 
 - **Manejo de datos avanzado**
 
-[x] Implementación de un sistema de favoritos para marcar tareas como destacadas.
-[x] Persistencia de tareas y favoritos específicos por usuario.
-[x] Implementar una caché personalizada en memoria para evitar accesos
-repetidos al estado global.
-[x] Los datos de las tareas deben ser serializados y comprimidos antes de ser
-almacenados en localStorage o enviarse al backend.
+- [x] Implementación de un sistema de favoritos para marcar tareas como destacadas.
+- [x] Persistencia de tareas y favoritos específicos por usuario.
+- [x] Implementar una caché personalizada en memoria para evitar accesos
+      repetidos al estado global.
+      [x] Los datos de las tareas deben ser serializados y comprimidos antes de ser
+      almacenados en localStorage o enviarse al backend.
 
 ## 🛠️ Tecnologías
 
@@ -127,7 +130,6 @@ La aplicación utiliza una estructura de datos basada en árbol para la gestión
 - Organización eficiente de tareas
 - Acceso rápido a tareas anidadas
 - Actualizaciones de estado optimizadas
-- Mejor rendimiento para grandes conjuntos de datos
 
 ## 📝 Licencia
 
