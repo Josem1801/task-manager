@@ -1,5 +1,7 @@
 # Aplicación de Gestión de Tareas
 
+> Para probar, puedes acceder con: eve.holt@reqres.in | cityslicka
+
 Su objetivo es permitir la autenticación de usuarios y la gestión de tareas mediante un sistema de tablero estilo Trello, con funcionalidad de arrastrar y soltar, persistencia de datos.
 
 <img src="./public/images/login.png" style="width: 48%; margin-right: 1%;" />
